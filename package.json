@@ -1,0 +1,20 @@
+{
+  "name": "penangresearch",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.95.1",
+    "lucide-react": "^1.14.0",
+    "next": "14.2.35",
+    "react": "^18",
+    "react-dom": "^18",
+    "recharts": "^3.8.1",
+    "xlsx": "^0.18.5"
+  }
+}
