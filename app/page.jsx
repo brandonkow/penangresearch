@@ -68,9 +68,9 @@ var D = {
     {y:"2017",p:1744100},{y:"2018",p:1762800},{y:"2019",p:1768800},{y:"2020",p:1770400},
   ],
   pie: [
-    {name:"Residential",val:8374,c:"#006A4D"},{name:"Commercial",val:2896,c:"#4CAF82"},
-    {name:"Industrial",val:1758,c:"#A5D6BF"},{name:"Dev Land",val:1548,c:"#D4EDE4"},
-    {name:"Agricultural",val:1347,c:"#69BE28"},
+    {name:"Residential",val:8374,c:"#C0272D"},{name:"Commercial",val:2896,c:"#E05555"},
+    {name:"Industrial",val:1758,c:"#F0AAAA"},{name:"Dev Land",val:1548,c:"#F7D0D0"},
+    {name:"Agricultural",val:1347,c:"#FAEAEA"},
   ],
   indStock: [
     {y:"2009",isl:1312,main:6018},{y:"2013",isl:1296,main:6364},
@@ -383,8 +383,8 @@ function KPI({label, value, sub, trend, accent}) {
       {sub && <span style={{fontSize:11,color:"var(--color-text-secondary)"}}>{sub}</span>}
       {trend != null && (
         <div style={{display:"flex",alignItems:"center",gap:4}}>
-          {up ? <ArrowUpRight size={13} color="#16a34a"/> : dn ? <ArrowDownRight size={13} color="#dc2626"/> : <Minus size={13} color="#9ca3af"/>}
-          <span style={{fontSize:11,color:up?"#16a34a":dn?"#dc2626":"#9ca3af",fontWeight:500}}>{Math.abs(trend).toFixed(1)}% YoY</span>
+          {up ? <ArrowUpRight size={13} color={G}/> : dn ? <ArrowDownRight size={13} color="#dc2626"/> : <Minus size={13} color="#9ca3af"/>}
+          <span style={{fontSize:11,color:up?G:dn?"#dc2626":"#9ca3af",fontWeight:500}}>{Math.abs(trend).toFixed(1)}% YoY</span>
         </div>
       )}
     </div>
@@ -923,7 +923,7 @@ function AIAnalysis() {
   var QUICK = ["What drove the 2023 commercial spike?","Is Penang affordable for M40?","Best investment opportunity now?","Industrial FDI outlook","Island vs Mainland comparison"]
   return (
     <div style={{display:"flex",flexDirection:"column",height:"calc(100vh - 200px)",minHeight:500}}>
-      <div style={{background:"linear-gradient(135deg,#006A4D,#004D37)",borderRadius:"var(--border-radius-lg)",padding:"1rem 1.25rem",marginBottom:16,display:"flex",alignItems:"center",gap:12}}>
+      <div style={{background:"linear-gradient(135deg,#C0272D,#8B0000)",borderRadius:"var(--border-radius-lg)",padding:"1rem 1.25rem",marginBottom:16,display:"flex",alignItems:"center",gap:12}}>
         <div style={{background:"rgba(255,255,255,0.15)",borderRadius:10,padding:8}}><Sparkles size={20} color="#fff"/></div>
         <div>
           <p style={{fontWeight:500,color:"#fff",fontSize:14,margin:0}}>NAPIC Penang AI Analyst</p>
@@ -1025,7 +1025,7 @@ function DataRefresh() {
           </div>
           {intel ? (
             <div style={{background:"var(--color-background-primary)",border:"0.5px solid var(--color-border-tertiary)",borderRadius:"var(--border-radius-lg)",padding:"1.25rem",overflowY:"auto",maxHeight:440}}>
-              <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:12}}><CheckCircle size={16} color="#16a34a"/><p style={{fontWeight:500,fontSize:13,margin:0}}>Intelligence Report</p></div>
+              <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:12}}><CheckCircle size={16} color="#C0272D"/><p style={{fontWeight:500,fontSize:13,margin:0}}>Intelligence Report</p></div>
               <MD text={intel}/>
             </div>
           ) : (
@@ -1044,7 +1044,7 @@ function DataRefresh() {
           </div>
           {upResult && (
             <div style={{background:"var(--color-background-primary)",border:"0.5px solid var(--color-border-tertiary)",borderRadius:"var(--border-radius-lg)",padding:"1.25rem"}}>
-              <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:12}}><CheckCircle size={16} color="#16a34a"/><p style={{fontWeight:500,fontSize:13,margin:0}}>File Analysis Complete</p></div>
+              <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:12}}><CheckCircle size={16} color="#C0272D"/><p style={{fontWeight:500,fontSize:13,margin:0}}>File Analysis Complete</p></div>
               <MD text={upResult}/>
             </div>
           )}
@@ -1071,7 +1071,7 @@ function Screener() {
   }
   function vs(v) {
     if (!v) return {bg:"#f3f4f6",color:"#6b7280",border:"#e5e7eb"}
-    if (v==="RECOMMENDED") return {bg:"#f0fdf4",color:"#166534",border:"#86efac"}
+    if (v==="RECOMMENDED") return {bg:"#fff5f5",color:"#9b1c1c",border:"#fca5a5"}
     if (v==="AVOID") return {bg:"#fef2f2",color:"#991b1b",border:"#fca5a5"}
     return {bg:"#fefce8",color:"#854d0e",border:"#fde68a"}
   }
@@ -1167,10 +1167,10 @@ function Screener() {
                     <div key={i}>
                       <div style={{display:"flex",justifyContent:"space-between",marginBottom:3}}>
                         <span style={{fontSize:12,fontWeight:500}}>{s.label}</span>
-                        <span style={{fontSize:12,fontWeight:700,color:s.score>=7?"#16a34a":s.score>=5?AM:"#dc2626"}}>{s.score}/10</span>
+                        <span style={{fontSize:12,fontWeight:700,color:s.score>=7?G:s.score>=5?AM:RD}}>{s.score}/10</span>
                       </div>
                       <div style={{height:5,background:"var(--color-background-secondary)",borderRadius:10,overflow:"hidden",marginBottom:3}}>
-                        <div style={{height:"100%",width:(s.score*10)+"%",background:s.score>=7?"#16a34a":s.score>=5?AM:"#dc2626",borderRadius:10}}/>
+                        <div style={{height:"100%",width:(s.score*10)+"%",background:s.score>=7?G:s.score>=5?AM:RD,borderRadius:10}}/>
                       </div>
                       <p style={{fontSize:11,color:"var(--color-text-secondary)",margin:0,lineHeight:1.6}}>{s.comment}</p>
                     </div>
@@ -1178,9 +1178,9 @@ function Screener() {
                 </div>
               </Box>
               <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
-                <div style={{background:"#f0fdf4",border:"0.5px solid #86efac",borderRadius:"var(--border-radius-lg)",padding:"1rem"}}>
-                  <p style={{fontWeight:500,fontSize:12,color:"#166534",margin:"0 0 8px"}}>Strengths</p>
-                  {(result.pros||[]).map((p,i) => <p key={i} style={{fontSize:11,color:"#166634",margin:"3px 0",lineHeight:1.6}}>- {p}</p>)}
+                <div style={{background:"#fff5f5",border:"0.5px solid #fca5a5",borderRadius:"var(--border-radius-lg)",padding:"1rem"}}>
+                  <p style={{fontWeight:500,fontSize:12,color:"#9b1c1c",margin:"0 0 8px"}}>Strengths</p>
+                  {(result.pros||[]).map((p,i) => <p key={i} style={{fontSize:11,color:"#7f1d1d",margin:"3px 0",lineHeight:1.6}}>- {p}</p>)}
                 </div>
                 <div style={{background:"#fef2f2",border:"0.5px solid #fca5a5",borderRadius:"var(--border-radius-lg)",padding:"1rem"}}>
                   <p style={{fontWeight:500,fontSize:12,color:"#991b1b",margin:"0 0 8px"}}>Risks</p>
