@@ -1,8 +1,8 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Penang Property Market Intelligence Dashboard",
-  description: "NAPIC Penang property data dashboard with AI analysis powered by Claude",
+  title: "Gamuda Property Market Intelligence",
+  description: "Gamuda property market intelligence dashboard with AI analysis powered by Claude",
 };
 
 export default function RootLayout({ children }) {
