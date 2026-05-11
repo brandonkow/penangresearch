@@ -93,7 +93,7 @@ var D = {
 // ─── CONSTANTS ────────────────────────────────────────────────────────────────
 var G = "#C0272D", G2 = "#E05555", G3 = "#F0AAAA", AM = "#F59E0B", RD = "#EF4444", PU = "#8B5CF6"
 var CS = {fontFamily:"var(--font-sans)",fontSize:11,fill:"var(--color-text-secondary)"}
-var CTX = "Senior property market analyst for Gamuda Land. NAPIC Penang data:\n2024: 24,428 tx, RM15.9B, RM462K avg. Res:18,122/RM8.37B. Com:2,416/RM2.9B. Ind:500/RM1.76B.\nIsland ~44% transactions, higher prices. Mainland ~56%.\nHPI(2000=100): AllHouse 224, HiRise 278, Terr 204. Overhang 3,257(3Q24). Afford ratio 5.3x.\nIndustrial: 8,676 units, near-zero overhang, 15-25% Msia FDI. E&E hub.\nHotels: 71/16,770 rooms(2025). Airport 7.78M pax(2024). Pop 1.77M(2020). Mfg 40-45% GDP.\nGamuda Land is a leading Malaysian property developer with projects across Penang including townships, integrated developments, and affordable housing."
+var CTX = "Senior property market analyst for Gamuda Land. Penang property market data:\n2024: 24,428 tx, RM15.9B, RM462K avg. Res:18,122/RM8.37B. Com:2,416/RM2.9B. Ind:500/RM1.76B.\nIsland ~44% transactions, higher prices. Mainland ~56%.\nHPI(2000=100): AllHouse 224, HiRise 278, Terr 204. Overhang 3,257(3Q24). Afford ratio 5.3x.\nIndustrial: 8,676 units, near-zero overhang, 15-25% Msia FDI. E&E hub.\nHotels: 71/16,770 rooms(2025). Airport 7.78M pax(2024). Pop 1.77M(2020). Mfg 40-45% GDP.\nGamuda Land is a leading Malaysian property developer with projects across Penang including townships, integrated developments, and affordable housing."
 
 var TABS = [
   {id:"ov",  label:"Overview",           icon:BarChart3},
@@ -342,7 +342,7 @@ function buildSectionPDF(secId, insight) {
   var legend = CHART_LEGENDS[secId] || ""
   var insightHTML = insight.split("\n").filter(p => p.trim()).map(p => `<p>${p}</p>`).join("")
   var css = "@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',sans-serif;color:#111827;background:#fff;font-size:13px}.cov{background:linear-gradient(140deg,#1A0508,#C0272D 60%,#E04040);color:#fff;padding:52px 64px 40px}.badge{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:4px 14px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:22px}.title{font-size:36px;font-weight:700;line-height:1.2;margin-bottom:10px}.sub{font-size:13px;color:rgba(255,255,255,.7);line-height:1.6}.rule{border:none;border-top:1px solid rgba(255,255,255,.2);margin:22px 0}.meta{display:flex;gap:40px}.ml{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.4);margin-bottom:4px}.mv{font-size:12px;font-weight:500}.body{padding:40px 64px}.st{font-size:20px;font-weight:700;color:#111827;margin-bottom:4px}.rule2{width:40px;height:3px;background:#C0272D;border-radius:2px;margin-bottom:24px}.legend{display:flex;gap:14px;margin-bottom:14px;align-items:center}.leg{display:flex;align-items:center;gap:5px;font-size:10.5px;color:#6b7280}.dot{display:inline-block;width:10px;height:10px;border-radius:2px;flex-shrink:0}.cw{background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px;padding:18px 20px;margin-bottom:8px}.ib{margin-top:28px;border-left:3px solid #C0272D;padding:18px 22px;background:#fdf2f2;border-radius:0 10px 10px 0}.ilbl{font-size:9.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#C0272D;margin-bottom:12px}.ib p{font-size:12.5px;line-height:1.85;color:#374151;margin-bottom:10px}.footer{padding:14px 64px;background:#f9fafb;border-top:1px solid #e5e7eb;display:flex;justify-content:space-between}.footer span{font-size:10px;color:#9ca3af}@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact}}"
-  return `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>${css}</style></head><body><div class="cov"><div class="badge">Gamuda Intelligence - Property Market Data</div><div class="title">${title}</div><div class="sub">Gamuda Property Market Intelligence - NAPIC source data, 1995-2024</div><hr class="rule"/><div class="meta"><div><div class="ml">Date</div><div class="mv">${date}</div></div><div><div class="ml">Source</div><div class="mv">NAPIC</div></div><div><div class="ml">AI</div><div class="mv">Claude Sonnet</div></div></div></div><div class="body"><div class="st">${title}</div><div class="rule2"></div>${legend ? `<div class="legend">${legend}</div>` : ""}<div class="cw">${chart}</div><div class="ib"><div class="ilbl">AI Analyst Insights</div>${insightHTML}</div></div><div class="footer"><span>Gamuda Intelligence Dashboard</span><span>${date} - Download HTML then Print to save as PDF</span></div><script>window.onload=function(){setTimeout(function(){window.print()},600)}<\/script></body></html>`
+  return `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>${css}</style></head><body><div class="cov"><div class="badge">Gamuda Intelligence - Property Market Data</div><div class="title">${title}</div><div class="sub">Gamuda Property Market Intelligence - Property market data, 1995-2024</div><hr class="rule"/><div class="meta"><div><div class="ml">Date</div><div class="mv">${date}</div></div><div><div class="ml">Source</div><div class="mv">Market Data</div></div><div><div class="ml">AI</div><div class="mv">Claude Sonnet</div></div></div></div><div class="body"><div class="st">${title}</div><div class="rule2"></div>${legend ? `<div class="legend">${legend}</div>` : ""}<div class="cw">${chart}</div><div class="ib"><div class="ilbl">AI Analyst Insights</div>${insightHTML}</div></div><div class="footer"><span>Gamuda Intelligence Dashboard</span><span>${date} - Download HTML then Print to save as PDF</span></div><script>window.onload=function(){setTimeout(function(){window.print()},600)}<\/script></body></html>`
 }
 
 // ─── SECTION REPORT BUTTON ────────────────────────────────────────────────────
@@ -351,7 +351,7 @@ function SectionReport({secId}) {
   function run() {
     setLoading(true)
     var title = STIT[secId] || secId
-    var prompt = `Write a detailed professional analyst report for the Penang ${title} section using NAPIC data.\n\n## Market Overview\n2 paragraphs with key figures.\n\n## Key Trends\n2 paragraphs on trends and drivers.\n\n## Risks and Opportunities\n1 paragraph on risks. 1 paragraph on opportunities.\n\n## Outlook\n1 paragraph on the 12-24 month outlook.\n\nBe direct. Use specific NAPIC figures.`
+    var prompt = `Write a detailed professional analyst report for the Penang ${title} section using Gamuda property market data.\n\n## Market Overview\n2 paragraphs with key figures.\n\n## Key Trends\n2 paragraphs on trends and drivers.\n\n## Risks and Opportunities\n1 paragraph on risks. 1 paragraph on opportunities.\n\n## Outlook\n1 paragraph on the 12-24 month outlook.\n\nBe direct. Use specific figures.`
     callAI(CTX, [{role:"user",content:prompt}], 1500)
       .then(insight => {
         var date = new Date().toLocaleDateString("en-MY").replace(/\//g,"-")
@@ -863,7 +863,7 @@ function ForecastingAgent() {
           <div style={{background:"rgba(245,158,11,0.2)",borderRadius:10,padding:10,display:"flex"}}><TrendingUp size={22} color={AM}/></div>
           <div>
             <p style={{fontWeight:500,color:"#fff",fontSize:15,margin:0}}>Forecasting Agent</p>
-            <p style={{fontSize:12,color:"rgba(255,255,255,0.6)",margin:0}}>Linear regression · 10-year NAPIC data · 2025-2027 projection</p>
+            <p style={{fontSize:12,color:"rgba(255,255,255,0.6)",margin:0}}>Linear regression · 10-year market data · 2025-2027 projection</p>
           </div>
         </div>
         <button onClick={run} disabled={loading} style={{padding:"9px 20px",borderRadius:8,background:loading?"rgba(255,255,255,0.1)":AM,border:"none",cursor:loading?"default":"pointer",color:loading?"rgba(255,255,255,0.4)":"#fff",fontWeight:500,fontSize:12,display:"flex",alignItems:"center",gap:6,flexShrink:0}}>
@@ -903,7 +903,7 @@ function ForecastingAgent() {
 
 // ─── AI CHAT ──────────────────────────────────────────────────────────────────
 function AIAnalysis() {
-  var [msgs, setMsgs] = useState([{role:"assistant",content:"Hello! I am your NAPIC Penang AI analyst. Ask me anything about market trends, investment analysis, or sector comparisons."}])
+  var [msgs, setMsgs] = useState([{role:"assistant",content:"Hello! I am your Gamuda AI analyst. Ask me anything about market trends, investment analysis, or sector comparisons."}])
   var [input, setInput] = useState("")
   var [loading, setLoading] = useState(false)
   var endRef = useRef(null)
@@ -926,7 +926,7 @@ function AIAnalysis() {
       <div style={{background:"linear-gradient(135deg,#C0272D,#8B0000)",borderRadius:"var(--border-radius-lg)",padding:"1rem 1.25rem",marginBottom:16,display:"flex",alignItems:"center",gap:12}}>
         <div style={{background:"rgba(255,255,255,0.15)",borderRadius:10,padding:8}}><Sparkles size={20} color="#fff"/></div>
         <div>
-          <p style={{fontWeight:500,color:"#fff",fontSize:14,margin:0}}>NAPIC Penang AI Analyst</p>
+          <p style={{fontWeight:500,color:"#fff",fontSize:14,margin:0}}>Gamuda AI Analyst</p>
           <p style={{fontSize:12,color:"rgba(255,255,255,0.75)",margin:0}}>Powered by Claude Sonnet</p>
         </div>
       </div>
@@ -988,7 +988,7 @@ function DataRefresh() {
     f.arrayBuffer().then(buf => {
       var wb = XLSX.read(buf, {type:"array"})
       var sum = `File: ${f.name}, ${wb.SheetNames.length} sheets: ${wb.SheetNames.join(", ")}`
-      var p = `Compare NAPIC file to dashboard (2024: 24,428 tx, RM15.9B, RM462K avg, 3,257 overhang).\nFile: ${sum}\n## File Assessment\n## Sheets Found\n## Potential Updates\nBullet: Field - current to detected - action\n## Recommendation`
+      var p = `Compare uploaded property data file to dashboard (2024: 24,428 tx, RM15.9B, RM462K avg, 3,257 overhang).\nFile: ${sum}\n## File Assessment\n## Sheets Found\n## Potential Updates\nBullet: Field - current to detected - action\n## Recommendation`
       return callAI(CTX, [{role:"user",content:p}], 1200)
     }).then(r => { setUpResult(r); setUploading(false) })
       .catch(() => { setUpResult("Error."); setUploading(false) })
@@ -1000,7 +1000,7 @@ function DataRefresh() {
         <div style={{background:"rgba(59,130,246,0.2)",borderRadius:10,padding:10,display:"flex"}}><RefreshCw size={22} color="#60a5fa"/></div>
         <div>
           <p style={{fontWeight:500,color:"#fff",fontSize:15,margin:0}}>Data Refresh Agent</p>
-          <p style={{fontSize:12,color:"rgba(255,255,255,0.6)",margin:0}}>Market intelligence or upload new NAPIC file for AI change detection</p>
+          <p style={{fontSize:12,color:"rgba(255,255,255,0.6)",margin:0}}>Market intelligence or upload new property data file for AI change detection</p>
         </div>
       </div>
       <div style={{display:"flex",gap:8}}>
@@ -1040,7 +1040,7 @@ function DataRefresh() {
           <input ref={fileRef} type="file" accept=".xlsx,.xls" onChange={handleUp} style={{display:"none"}}/>
           <div style={{background:"var(--color-background-primary)",border:"2px dashed var(--color-border-secondary)",borderRadius:"var(--border-radius-lg)",padding:"2rem",display:"flex",flexDirection:"column",alignItems:"center",gap:12,cursor:"pointer"}} onClick={() => fileRef.current && fileRef.current.click()}>
             {uploading ? <Loader2 size={28} color={G} style={{animation:"spin 1s linear infinite"}}/> : <Upload size={28} color="var(--color-text-secondary)"/>}
-            <p style={{fontWeight:500,fontSize:14,margin:0}}>{uploading ? "Analysing file..." : "Upload New NAPIC Excel File"}</p>
+            <p style={{fontWeight:500,fontSize:14,margin:0}}>{uploading ? "Analysing file..." : "Upload New Property Data File"}</p>
           </div>
           {upResult && (
             <div style={{background:"var(--color-background-primary)",border:"0.5px solid var(--color-border-tertiary)",borderRadius:"var(--border-radius-lg)",padding:"1.25rem"}}>
@@ -1123,7 +1123,7 @@ function Screener() {
           {screening && (
             <div style={{background:"var(--color-background-primary)",border:"0.5px solid var(--color-border-tertiary)",borderRadius:"var(--border-radius-lg)",padding:"2rem",display:"flex",flexDirection:"column",alignItems:"center",gap:14,flex:1}}>
               <Loader2 size={34} color={PU} style={{animation:"spin 1s linear infinite"}}/>
-              <p style={{fontSize:14,fontWeight:500}}>Analysing 30 years of NAPIC data...</p>
+              <p style={{fontSize:14,fontWeight:500}}>Analysing 30 years of market data...</p>
             </div>
           )}
           {result && (
@@ -1258,7 +1258,7 @@ export default function Dashboard() {
               <h1 style={{fontSize:15,fontWeight:500,margin:0,color:"var(--color-text-primary)"}}>{cur && cur.label}</h1>
               {isAI && <span style={{padding:"2px 7px",borderRadius:20,fontSize:10,fontWeight:600,background:"rgba(139,92,246,0.1)",color:"#7c3aed",border:"1px solid rgba(139,92,246,0.2)"}}>AGENTIC AI</span>}
             </div>
-            <p style={{fontSize:11,color:"var(--color-text-secondary)",margin:0,marginTop:1}}>Gamuda Property Market Intelligence · NAPIC · Q1 2025</p>
+            <p style={{fontSize:11,color:"var(--color-text-secondary)",margin:0,marginTop:1}}>Gamuda Property Market Intelligence · Q1 2025</p>
           </div>
           <div style={{padding:"5px 12px",borderRadius:20,background:"#FEF2F2",fontSize:11,fontWeight:500,color:"#C0272D",display:"flex",alignItems:"center",gap:6}}>
             <span style={{width:6,height:6,borderRadius:"50%",background:"#C0272D",display:"inline-block"}}/>Live Dashboard
