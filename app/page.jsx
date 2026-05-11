@@ -91,7 +91,7 @@ var D = {
 }
 
 // ─── CONSTANTS ────────────────────────────────────────────────────────────────
-var G = "#1B5E38", G2 = "#3A8C62", G3 = "#9DC9B2", AM = "#F59E0B", RD = "#EF4444", PU = "#8B5CF6"
+var G = "#C0272D", G2 = "#E05555", G3 = "#F0AAAA", AM = "#F59E0B", RD = "#EF4444", PU = "#8B5CF6"
 var CS = {fontFamily:"var(--font-sans)",fontSize:11,fill:"var(--color-text-secondary)"}
 var CTX = "Senior property market analyst for Gamuda Land. NAPIC Penang data:\n2024: 24,428 tx, RM15.9B, RM462K avg. Res:18,122/RM8.37B. Com:2,416/RM2.9B. Ind:500/RM1.76B.\nIsland ~44% transactions, higher prices. Mainland ~56%.\nHPI(2000=100): AllHouse 224, HiRise 278, Terr 204. Overhang 3,257(3Q24). Afford ratio 5.3x.\nIndustrial: 8,676 units, near-zero overhang, 15-25% Msia FDI. E&E hub.\nHotels: 71/16,770 rooms(2025). Airport 7.78M pax(2024). Pop 1.77M(2020). Mfg 40-45% GDP.\nGamuda Land is a leading Malaysian property developer with projects across Penang including townships, integrated developments, and affordable housing."
 
@@ -327,11 +327,11 @@ function getChart(s) {
 }
 
 var CHART_LEGENDS = {
-  tx:  '<span class="leg"><span class="dot" style="background:#1B5E38"></span>Residential</span><span class="leg"><span class="dot" style="background:#3A8C62"></span>Commercial</span><span class="leg"><span class="dot" style="background:#9DC9B2"></span>Industrial</span>',
-  res: '<span class="leg"><span class="dot" style="background:#1B5E38"></span>Volume</span><span class="leg"><span class="dot" style="background:#F59E0B"></span>Value (RM M)</span>',
-  hpi: '<span class="leg"><span class="dot" style="background:#1B5E38"></span>All House</span><span class="leg"><span class="dot" style="background:#3A8C62"></span>Terraced</span><span class="leg"><span class="dot" style="background:#EF4444"></span>High-Rise</span>',
-  ind: '<span class="leg"><span class="dot" style="background:#1B5E38"></span>Island</span><span class="leg"><span class="dot" style="background:#3A8C62"></span>Mainland</span>',
-  hot: '<span class="leg"><span class="dot" style="background:#1B5E38"></span>Island Rooms</span><span class="leg"><span class="dot" style="background:#3A8C62"></span>Mainland Rooms</span>',
+  tx:  '<span class="leg"><span class="dot" style="background:#C0272D"></span>Residential</span><span class="leg"><span class="dot" style="background:#E05555"></span>Commercial</span><span class="leg"><span class="dot" style="background:#F0AAAA"></span>Industrial</span>',
+  res: '<span class="leg"><span class="dot" style="background:#C0272D"></span>Volume</span><span class="leg"><span class="dot" style="background:#F59E0B"></span>Value (RM M)</span>',
+  hpi: '<span class="leg"><span class="dot" style="background:#C0272D"></span>All House</span><span class="leg"><span class="dot" style="background:#E05555"></span>Terraced</span><span class="leg"><span class="dot" style="background:#8B5CF6"></span>High-Rise</span>',
+  ind: '<span class="leg"><span class="dot" style="background:#C0272D"></span>Island</span><span class="leg"><span class="dot" style="background:#E05555"></span>Mainland</span>',
+  hot: '<span class="leg"><span class="dot" style="background:#C0272D"></span>Island Rooms</span><span class="leg"><span class="dot" style="background:#E05555"></span>Mainland Rooms</span>',
 }
 
 // ─── PDF BUILDER ──────────────────────────────────────────────────────────────
@@ -341,7 +341,7 @@ function buildSectionPDF(secId, insight) {
   var chart = getChart(secId)
   var legend = CHART_LEGENDS[secId] || ""
   var insightHTML = insight.split("\n").filter(p => p.trim()).map(p => `<p>${p}</p>`).join("")
-  var css = "@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',sans-serif;color:#111827;background:#fff;font-size:13px}.cov{background:linear-gradient(140deg,#082032,#1B5E38 60%,#2E8A58);color:#fff;padding:52px 64px 40px}.badge{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:4px 14px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:22px}.title{font-size:36px;font-weight:700;line-height:1.2;margin-bottom:10px}.sub{font-size:13px;color:rgba(255,255,255,.7);line-height:1.6}.rule{border:none;border-top:1px solid rgba(255,255,255,.2);margin:22px 0}.meta{display:flex;gap:40px}.ml{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.4);margin-bottom:4px}.mv{font-size:12px;font-weight:500}.body{padding:40px 64px}.st{font-size:20px;font-weight:700;color:#111827;margin-bottom:4px}.rule2{width:40px;height:3px;background:#1B5E38;border-radius:2px;margin-bottom:24px}.legend{display:flex;gap:14px;margin-bottom:14px;align-items:center}.leg{display:flex;align-items:center;gap:5px;font-size:10.5px;color:#6b7280}.dot{display:inline-block;width:10px;height:10px;border-radius:2px;flex-shrink:0}.cw{background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px;padding:18px 20px;margin-bottom:8px}.ib{margin-top:28px;border-left:3px solid #1B5E38;padding:18px 22px;background:#f0f7f3;border-radius:0 10px 10px 0}.ilbl{font-size:9.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#1B5E38;margin-bottom:12px}.ib p{font-size:12.5px;line-height:1.85;color:#374151;margin-bottom:10px}.footer{padding:14px 64px;background:#f9fafb;border-top:1px solid #e5e7eb;display:flex;justify-content:space-between}.footer span{font-size:10px;color:#9ca3af}@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact}}"
+  var css = "@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',sans-serif;color:#111827;background:#fff;font-size:13px}.cov{background:linear-gradient(140deg,#1A0508,#C0272D 60%,#E04040);color:#fff;padding:52px 64px 40px}.badge{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:4px 14px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:22px}.title{font-size:36px;font-weight:700;line-height:1.2;margin-bottom:10px}.sub{font-size:13px;color:rgba(255,255,255,.7);line-height:1.6}.rule{border:none;border-top:1px solid rgba(255,255,255,.2);margin:22px 0}.meta{display:flex;gap:40px}.ml{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.4);margin-bottom:4px}.mv{font-size:12px;font-weight:500}.body{padding:40px 64px}.st{font-size:20px;font-weight:700;color:#111827;margin-bottom:4px}.rule2{width:40px;height:3px;background:#C0272D;border-radius:2px;margin-bottom:24px}.legend{display:flex;gap:14px;margin-bottom:14px;align-items:center}.leg{display:flex;align-items:center;gap:5px;font-size:10.5px;color:#6b7280}.dot{display:inline-block;width:10px;height:10px;border-radius:2px;flex-shrink:0}.cw{background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px;padding:18px 20px;margin-bottom:8px}.ib{margin-top:28px;border-left:3px solid #C0272D;padding:18px 22px;background:#fdf2f2;border-radius:0 10px 10px 0}.ilbl{font-size:9.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#C0272D;margin-bottom:12px}.ib p{font-size:12.5px;line-height:1.85;color:#374151;margin-bottom:10px}.footer{padding:14px 64px;background:#f9fafb;border-top:1px solid #e5e7eb;display:flex;justify-content:space-between}.footer span{font-size:10px;color:#9ca3af}@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact}}"
   return `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>${css}</style></head><body><div class="cov"><div class="badge">Gamuda Intelligence - Property Market Data</div><div class="title">${title}</div><div class="sub">Gamuda Property Market Intelligence - NAPIC source data, 1995-2024</div><hr class="rule"/><div class="meta"><div><div class="ml">Date</div><div class="mv">${date}</div></div><div><div class="ml">Source</div><div class="mv">NAPIC</div></div><div><div class="ml">AI</div><div class="mv">Claude Sonnet</div></div></div></div><div class="body"><div class="st">${title}</div><div class="rule2"></div>${legend ? `<div class="legend">${legend}</div>` : ""}<div class="cw">${chart}</div><div class="ib"><div class="ilbl">AI Analyst Insights</div>${insightHTML}</div></div><div class="footer"><span>Gamuda Intelligence Dashboard</span><span>${date} - Download HTML then Print to save as PDF</span></div><script>window.onload=function(){setTimeout(function(){window.print()},600)}<\/script></body></html>`
 }
 
@@ -1221,10 +1221,10 @@ export default function Dashboard() {
   var isAI = ["fc","scr","rfr","ai"].includes(tab)
   return (
     <div style={{display:"flex",minHeight:"100vh",background:"var(--color-background-tertiary)",fontFamily:"var(--font-sans)"}}>
-      <div style={{width:218,flexShrink:0,background:"#082032",display:"flex",flexDirection:"column",minHeight:"100vh",position:"sticky",top:0}}>
+      <div style={{width:218,flexShrink:0,background:"#1A0508",display:"flex",flexDirection:"column",minHeight:"100vh",position:"sticky",top:0}}>
         <div style={{padding:"20px 16px 14px",borderBottom:"1px solid rgba(255,255,255,0.08)"}}>
           <div style={{display:"flex",alignItems:"center",gap:10}}>
-            <div style={{width:32,height:32,background:"#C8A64A",borderRadius:8,display:"flex",alignItems:"center",justifyContent:"center"}}><BarChart3 size={18} color="#fff"/></div>
+            <div style={{width:32,height:32,background:"#C0272D",borderRadius:8,display:"flex",alignItems:"center",justifyContent:"center"}}><BarChart3 size={18} color="#fff"/></div>
             <div>
               <p style={{color:"#fff",fontWeight:500,fontSize:13,margin:0,lineHeight:1.2}}>Gamuda Intelligence</p>
               <p style={{color:"rgba(255,255,255,0.5)",fontSize:10,margin:0}}>Property Intelligence</p>
@@ -1236,7 +1236,7 @@ export default function Dashboard() {
             if (t.id === "div") return <div key={i} style={{height:1,background:"rgba(255,255,255,0.08)",margin:"6px 4px"}}/>
             var Icon = t.icon, active = tab === t.id
             return (
-              <button key={t.id} onClick={() => setTab(t.id)} style={{display:"flex",alignItems:"center",gap:9,padding:"8px 10px",borderRadius:8,cursor:"pointer",background:active?"rgba(200,166,74,0.18)":"transparent",border:`1px solid ${active?"#C8A64A":"transparent"}`,color:active?"#C8A64A":"rgba(255,255,255,0.6)",width:"100%",textAlign:"left"}}>
+              <button key={t.id} onClick={() => setTab(t.id)} style={{display:"flex",alignItems:"center",gap:9,padding:"8px 10px",borderRadius:8,cursor:"pointer",background:active?"rgba(192,39,45,0.25)":"transparent",border:`1px solid ${active?"#E05555":"transparent"}`,color:active?"#FF8080":"rgba(255,255,255,0.6)",width:"100%",textAlign:"left"}}>
                 <Icon size={14}/>
                 <span style={{fontSize:12,fontWeight:active?500:400,flex:1}}>{t.label}</span>
                 {t.badge && <span style={{padding:"1px 5px",borderRadius:20,fontSize:9,fontWeight:600,background:"rgba(139,92,246,0.3)",color:"#c4b5fd"}}>{t.badge}</span>}
@@ -1260,8 +1260,8 @@ export default function Dashboard() {
             </div>
             <p style={{fontSize:11,color:"var(--color-text-secondary)",margin:0,marginTop:1}}>Gamuda Property Market Intelligence · NAPIC · Q1 2025</p>
           </div>
-          <div style={{padding:"5px 12px",borderRadius:20,background:"#EEF4EE",fontSize:11,fontWeight:500,color:"#1B5E38",display:"flex",alignItems:"center",gap:6}}>
-            <span style={{width:6,height:6,borderRadius:"50%",background:"#1B5E38",display:"inline-block"}}/>Live Dashboard
+          <div style={{padding:"5px 12px",borderRadius:20,background:"#FEF2F2",fontSize:11,fontWeight:500,color:"#C0272D",display:"flex",alignItems:"center",gap:6}}>
+            <span style={{width:6,height:6,borderRadius:"50%",background:"#C0272D",display:"inline-block"}}/>Live Dashboard
           </div>
         </div>
         <div style={{flex:1,overflowY:"auto",padding:"18px 24px 40px"}}>
