@@ -12,7 +12,7 @@ import {
   Upload, TrendingUp, Home, Building2, Factory, Hotel, Users, BarChart3,
   Brain, Send, Loader2, ChevronRight, RefreshCw, Sparkles, DollarSign,
   ArrowUpRight, ArrowDownRight, Minus, FileText, CheckCircle, Target,
-  Search, Download, Globe, MapPin,
+  Search, Download, Globe, MapPin, Presentation, SlidersHorizontal,
 } from "lucide-react"
 
 // ─── DATA ─────────────────────────────────────────────────────────────────────
@@ -345,6 +345,55 @@ function buildSectionPDF(secId, insight) {
   return `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>${css}</style></head><body><div class="cov"><div class="badge">Gamuda Intelligence - Property Market Data</div><div class="title">${title}</div><div class="sub">Gamuda Property Market Intelligence - Property market data, 1995-2024</div><hr class="rule"/><div class="meta"><div><div class="ml">Date</div><div class="mv">${date}</div></div><div><div class="ml">Source</div><div class="mv">Market Data</div></div><div><div class="ml">AI</div><div class="mv">Claude Sonnet</div></div></div></div><div class="body"><div class="st">${title}</div><div class="rule2"></div>${legend ? `<div class="legend">${legend}</div>` : ""}<div class="cw">${chart}</div><div class="ib"><div class="ilbl">AI Analyst Insights</div>${insightHTML}</div></div><div class="footer"><span>Gamuda Intelligence Dashboard</span><span>${date} - Download HTML then Print to save as PDF</span></div><script>window.onload=function(){setTimeout(function(){window.print()},600)}<\/script></body></html>`
 }
 
+// ─── SLIDES GENERATOR ────────────────────────────────────────────────────────
+function buildSlidesDeck(bullets) {
+  var date = new Date().toLocaleDateString("en-MY", {year:"numeric",month:"long",day:"numeric"})
+  var SECTIONS = [
+    {title:"Market Overview",    chart:getChart("ov"),  key:"overview"},
+    {title:"Transactions",       chart:getChart("tx"),  key:"transactions"},
+    {title:"Residential Market", chart:getChart("res"), key:"residential"},
+    {title:"House Price Index",  chart:getChart("hpi"), key:"priceIndex"},
+    {title:"Commercial Market",  chart:getChart("com"), key:"commercial"},
+    {title:"Industrial Sector",  chart:getChart("ind"), key:"industrial"},
+    {title:"Hotel & Tourism",    chart:getChart("hot"), key:"hotel"},
+    {title:"Demographics",       chart:getChart("dem"), key:"demographics"},
+  ]
+  var css = `@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',sans-serif;background:#111}@media print{body{background:#fff}.slide{margin:0;box-shadow:none;page-break-after:always}}.slide{width:1280px;height:720px;position:relative;overflow:hidden;margin:0 auto 20px;background:#fff;box-shadow:0 4px 24px rgba(0,0,0,.35)}.cover{background:linear-gradient(135deg,#1A0508 0%,#C0272D 55%,#E04040 100%)}.cover-inner{padding:88px;display:flex;flex-direction:column;justify-content:center;height:100%}.badge{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:6px 18px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:36px;width:fit-content}.cover-title{font-size:54px;font-weight:700;color:#fff;line-height:1.15;margin-bottom:18px}.cover-sub{font-size:19px;color:rgba(255,255,255,.65);margin-bottom:52px}.cover-meta{display:flex;gap:52px;padding-top:32px;border-top:1px solid rgba(255,255,255,.18)}.ml{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.4);margin-bottom:5px}.mv{font-size:13px;color:#fff;font-weight:500}.slide-header{height:88px;background:#C0272D;display:flex;align-items:center;padding:0 52px;justify-content:space-between}.slide-title{font-size:28px;font-weight:700;color:#fff}.slide-logo{display:flex;align-items:center;gap:10px}.mark{width:36px;height:36px;background:rgba(255,255,255,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:#fff}.logo-name{font-size:12px;color:rgba(255,255,255,.8);font-weight:500}.slide-body{display:flex;height:590px}.chart-area{flex:1.45;padding:24px 20px 24px 44px;display:flex;flex-direction:column;justify-content:center;border-right:1px solid #f0f0f0}.chart-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#C0272D;margin-bottom:14px}.insights{flex:1;padding:32px 40px;display:flex;flex-direction:column;justify-content:center;background:#fafafa}.ins-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#C0272D;margin-bottom:18px;padding-bottom:10px;border-bottom:2px solid #C0272D}.bullet{display:flex;gap:12px;margin-bottom:16px;align-items:flex-start}.dot{width:7px;height:7px;background:#C0272D;border-radius:50%;margin-top:6px;flex-shrink:0}.bullet p{font-size:14px;line-height:1.65;color:#1f2937}.slide-footer{position:absolute;bottom:0;left:0;right:0;height:40px;background:#f9fafb;border-top:1px solid #e5e7eb;display:flex;align-items:center;justify-content:space-between;padding:0 44px}.slide-footer span{font-size:10px;color:#9ca3af}`
+  var cover = `<div class="slide cover"><div class="cover-inner"><div class="badge">Gamuda Property Intelligence</div><div class="cover-title">Penang Property<br/>Market Intelligence</div><div class="cover-sub">Market Overview · Data Analysis · Strategic Insights</div><div class="cover-meta"><div><div class="ml">Date</div><div class="mv">${date}</div></div><div><div class="ml">Market</div><div class="mv">Penang, Malaysia</div></div><div><div class="ml">Data Period</div><div class="mv">1995 – 2024</div></div><div><div class="ml">Powered by</div><div class="mv">Claude AI</div></div></div></div></div>`
+  var slides = SECTIONS.map((s,i) => {
+    var pts = (bullets && bullets[s.key]) || ["Market data for this section is available in the dashboard.","Review charts for detailed trend analysis.","AI insights available on demand."]
+    var bHTML = pts.map(p => `<div class="bullet"><div class="dot"></div><p>${p}</p></div>`).join("")
+    return `<div class="slide"><div class="slide-header"><div class="slide-title">${s.title}</div><div class="slide-logo"><div class="mark">G</div><div class="logo-name">Gamuda Intelligence</div></div></div><div class="slide-body"><div class="chart-area"><div class="chart-label">Market Data · 1995–2024</div>${s.chart}</div><div class="insights"><div class="ins-label">Key Insights</div>${bHTML}</div></div><div class="slide-footer"><span>Gamuda Property Intelligence · Penang</span><span>Slide ${i+2} of ${SECTIONS.length+1}</span></div></div>`
+  }).join("")
+  return `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Gamuda Property Intelligence</title><style>${css}</style></head><body>${cover}${slides}</body></html>`
+}
+
+function SlidesButton() {
+  var [loading, setLoading] = useState(false)
+  function run() {
+    setLoading(true)
+    var prompt = `Generate 3 concise insight bullet points for each Penang property market section for a presentation. Return valid JSON only:\n{"overview":["p1","p2","p3"],"transactions":["p1","p2","p3"],"residential":["p1","p2","p3"],"priceIndex":["p1","p2","p3"],"commercial":["p1","p2","p3"],"industrial":["p1","p2","p3"],"hotel":["p1","p2","p3"],"demographics":["p1","p2","p3"]}\nRules: max 18 words each, use specific numbers, insight-focused not descriptive.`
+    callAI(CTX, [{role:"user",content:prompt}], 2000)
+      .then(r => {
+        var bullets = safeJSON(r)
+        var d = new Date().toLocaleDateString("en-MY").replace(/\//g,"-")
+        downloadHTML(buildSlidesDeck(bullets), `Gamuda_Penang_Slides_${d}.html`)
+        setLoading(false)
+      })
+      .catch(() => {
+        var d = new Date().toLocaleDateString("en-MY").replace(/\//g,"-")
+        downloadHTML(buildSlidesDeck(null), `Gamuda_Penang_Slides_${d}.html`)
+        setLoading(false)
+      })
+  }
+  return (
+    <button onClick={run} disabled={loading} style={{padding:"7px 16px",borderRadius:8,background:loading?"var(--color-background-secondary)":"#1A0508",border:`1px solid ${loading?"var(--color-border-secondary)":"#C0272D"}`,cursor:loading?"default":"pointer",color:loading?"var(--color-text-secondary)":"#fff",fontWeight:500,fontSize:12,display:"flex",alignItems:"center",gap:7,whiteSpace:"nowrap"}}>
+      {loading ? <Loader2 size={13} style={{animation:"spin 1s linear infinite"}}/> : <Presentation size={13} color={loading?"var(--color-text-secondary)":"#E05555"}/>}
+      {loading ? "Generating..." : "Generate Slides"}
+    </button>
+  )
+}
+
 // ─── SECTION REPORT BUTTON ────────────────────────────────────────────────────
 function SectionReport({secId}) {
   var [loading, setLoading] = useState(false)
@@ -400,37 +449,70 @@ function Box({title, h, children}) {
   )
 }
 
-function DistrictFilter({dist, setDist}) {
-  var opts = [
-    {id:"all",     label:"All Penang",     icon:Globe},
-    {id:"island",  label:"Penang Island",  icon:MapPin},
-    {id:"mainland",label:"Seberang Perai", icon:MapPin},
+function DistrictFilter({dist, setDist, yearRange, setYearRange, propType, setPropType}) {
+  var distOpts = [
+    {id:"all",      label:"All Penang",     icon:Globe},
+    {id:"island",   label:"Penang Island",  icon:MapPin},
+    {id:"mainland", label:"Seberang Perai", icon:MapPin},
   ]
+  var propOpts = [
+    {id:"all", label:"All Types"},
+    {id:"res", label:"Residential"},
+    {id:"com", label:"Commercial"},
+    {id:"ind", label:"Industrial"},
+  ]
+  var years = D.tx.map(r => r.y)
+  var selStyle = {padding:"4px 8px",borderRadius:6,fontSize:11,border:"0.5px solid var(--color-border-secondary)",background:"var(--color-background-primary)",color:"var(--color-text-primary)",cursor:"pointer"}
   return (
-    <div style={{display:"flex",alignItems:"center",gap:8,padding:"8px 12px",background:"var(--color-background-secondary)",borderRadius:10,marginBottom:16,border:"0.5px solid var(--color-border-tertiary)"}}>
-      <span style={{fontSize:11,fontWeight:500,color:"var(--color-text-secondary)",textTransform:"uppercase",letterSpacing:"0.06em",marginRight:4}}>Filter:</span>
-      {opts.map(o => {
-        var active = dist === o.id
-        var Icon = o.icon
-        return (
-          <button key={o.id} onClick={() => setDist(o.id)} style={{padding:"5px 14px",borderRadius:20,fontSize:12,fontWeight:active?600:400,cursor:"pointer",background:active?G:"transparent",color:active?"#fff":"var(--color-text-secondary)",border:`0.5px solid ${active?G:"var(--color-border-secondary)"}`,display:"flex",alignItems:"center",gap:5}}>
-            <Icon size={11}/>{o.label}
-          </button>
-        )
-      })}
+    <div style={{background:"var(--color-background-secondary)",borderRadius:10,marginBottom:16,border:"0.5px solid var(--color-border-tertiary)",overflow:"hidden"}}>
+      <div style={{display:"flex",alignItems:"center",gap:8,padding:"8px 12px",flexWrap:"wrap"}}>
+        <SlidersHorizontal size={12} color="var(--color-text-secondary)"/>
+        <span style={{fontSize:11,fontWeight:500,color:"var(--color-text-secondary)",textTransform:"uppercase",letterSpacing:"0.06em"}}>District:</span>
+        {distOpts.map(o => {
+          var active = dist === o.id
+          var Icon = o.icon
+          return (
+            <button key={o.id} onClick={() => setDist(o.id)} style={{padding:"4px 12px",borderRadius:20,fontSize:11,fontWeight:active?600:400,cursor:"pointer",background:active?G:"transparent",color:active?"#fff":"var(--color-text-secondary)",border:`0.5px solid ${active?G:"var(--color-border-secondary)"}`,display:"flex",alignItems:"center",gap:4}}>
+              <Icon size={10}/>{o.label}
+            </button>
+          )
+        })}
+        <div style={{display:"flex",alignItems:"center",gap:6,marginLeft:"auto"}}>
+          <span style={{fontSize:11,fontWeight:500,color:"var(--color-text-secondary)"}}>Year:</span>
+          <select value={yearRange.from} onChange={e => setYearRange(p => ({...p, from:e.target.value}))} style={selStyle}>
+            {years.filter(y => y <= yearRange.to).map(y => <option key={y} value={y}>{y}</option>)}
+          </select>
+          <span style={{fontSize:11,color:"var(--color-text-secondary)"}}>–</span>
+          <select value={yearRange.to} onChange={e => setYearRange(p => ({...p, to:e.target.value}))} style={selStyle}>
+            {years.filter(y => y >= yearRange.from).map(y => <option key={y} value={y}>{y}</option>)}
+          </select>
+        </div>
+      </div>
+      <div style={{display:"flex",alignItems:"center",gap:6,padding:"6px 12px 8px",borderTop:"0.5px solid var(--color-border-tertiary)"}}>
+        <span style={{fontSize:11,fontWeight:500,color:"var(--color-text-secondary)",textTransform:"uppercase",letterSpacing:"0.06em"}}>Type:</span>
+        {propOpts.map(o => {
+          var active = propType === o.id
+          return (
+            <button key={o.id} onClick={() => setPropType(o.id)} style={{padding:"3px 10px",borderRadius:20,fontSize:11,fontWeight:active?600:400,cursor:"pointer",background:active?G:"transparent",color:active?"#fff":"var(--color-text-secondary)",border:`0.5px solid ${active?G:"var(--color-border-secondary)"}`}}>
+              {o.label}
+            </button>
+          )
+        })}
+      </div>
     </div>
   )
 }
 
 // ─── STANDARD TABS ────────────────────────────────────────────────────────────
-function Overview({dist}) {
+function Overview({dist, yearRange}) {
   var last = D.tx[D.tx.length-1], prev = D.tx[D.tx.length-2]
   var dt = D.distTx[D.distTx.length-1], dt2 = D.distTx[D.distTx.length-2]
   var vol = dist==="island"?dt.iV : dist==="mainland"?dt.mV : last.v
   var val = dist==="island"?dt.iA : dist==="mainland"?dt.mA : last.val
   var pvol = dist==="island"?dt2.iV : dist==="mainland"?dt2.mV : prev.v
   var pval = dist==="island"?dt2.iA : dist==="mainland"?dt2.mA : prev.val
-  var recent = dist==="island" ? D.distTx.map(r=>({y:r.y,v:r.iV})) : dist==="mainland" ? D.distTx.map(r=>({y:r.y,v:r.mV})) : D.tx.slice(-10)
+  var yr = yearRange || {from:"1998", to:"2024"}
+  var recent = (dist==="island" ? D.distTx.map(r=>({y:r.y,v:r.iV})) : dist==="mainland" ? D.distTx.map(r=>({y:r.y,v:r.mV})) : D.tx.map(r=>({y:r.y,v:r.v}))).filter(r => r.y >= yr.from && r.y <= yr.to)
   return (
     <div style={{display:"flex",flexDirection:"column",gap:16}}>
       <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(155px,1fr))",gap:12}}>
@@ -476,11 +558,13 @@ function Overview({dist}) {
   )
 }
 
-function Transactions({dist}) {
+function Transactions({dist, yearRange, propType}) {
   var [view, setView] = useState("vol")
-  var data = dist==="all" ? D.tx.slice(-12) : D.distTx
-  var vk = dist==="island"?"iV" : dist==="mainland"?"mV" : "v"
-  var ak = dist==="island"?"iA" : dist==="mainland"?"mA" : "val"
+  var yr = yearRange || {from:"1998", to:"2024"}
+  var pt = propType || "all"
+  var data = (dist==="all" ? D.tx : D.distTx).filter(r => r.y >= yr.from && r.y <= yr.to)
+  var vk = dist==="island"?"iV" : dist==="mainland"?"mV" : (pt==="res"?"rv" : pt==="com"?"cv" : pt==="ind"?"iv" : "v")
+  var ak = dist==="island"?"iA" : dist==="mainland"?"mA" : (pt==="res"?"rv2" : pt==="com"?"cv2" : pt==="ind"?"iv2" : "val")
   return (
     <div style={{display:"flex",flexDirection:"column",gap:16}}>
       <SectionReport secId="tx"/>
@@ -1201,10 +1285,12 @@ var DATA_TABS = ["ov","tx","res","hpi","com","ind","hot","dem"]
 export default function Dashboard() {
   var [tab, setTab] = useState("ov")
   var [dist, setDist] = useState("all")
+  var [yearRange, setYearRange] = useState({from:"2015", to:"2024"})
+  var [propType, setPropType] = useState("all")
   var showFilter = DATA_TABS.includes(tab)
   function renderContent() {
-    if (tab === "ov")  return <Overview dist={dist}/>
-    if (tab === "tx")  return <Transactions dist={dist}/>
+    if (tab === "ov")  return <Overview dist={dist} yearRange={yearRange}/>
+    if (tab === "tx")  return <Transactions dist={dist} yearRange={yearRange} propType={propType}/>
     if (tab === "res") return <Residential dist={dist}/>
     if (tab === "hpi") return <HPI/>
     if (tab === "com") return <Commercial/>
@@ -1215,7 +1301,7 @@ export default function Dashboard() {
     if (tab === "scr") return <Screener/>
     if (tab === "rfr") return <DataRefresh/>
     if (tab === "ai")  return <AIAnalysis/>
-    return <Overview dist={dist}/>
+    return <Overview dist={dist} yearRange={yearRange}/>
   }
   var cur = TABS.find(t => t.id === tab)
   var isAI = ["fc","scr","rfr","ai"].includes(tab)
@@ -1260,12 +1346,15 @@ export default function Dashboard() {
             </div>
             <p style={{fontSize:11,color:"var(--color-text-secondary)",margin:0,marginTop:1}}>Gamuda Property Market Intelligence · Q1 2025</p>
           </div>
-          <div style={{padding:"5px 12px",borderRadius:20,background:"#FEF2F2",fontSize:11,fontWeight:500,color:"#C0272D",display:"flex",alignItems:"center",gap:6}}>
-            <span style={{width:6,height:6,borderRadius:"50%",background:"#C0272D",display:"inline-block"}}/>Live Dashboard
+          <div style={{display:"flex",alignItems:"center",gap:10}}>
+            <SlidesButton/>
+            <div style={{padding:"5px 12px",borderRadius:20,background:"#FEF2F2",fontSize:11,fontWeight:500,color:"#C0272D",display:"flex",alignItems:"center",gap:6}}>
+              <span style={{width:6,height:6,borderRadius:"50%",background:"#C0272D",display:"inline-block"}}/>Live Dashboard
+            </div>
           </div>
         </div>
         <div style={{flex:1,overflowY:"auto",padding:"18px 24px 40px"}}>
-          {showFilter && <DistrictFilter dist={dist} setDist={setDist}/>}
+          {showFilter && <DistrictFilter dist={dist} setDist={setDist} yearRange={yearRange} setYearRange={setYearRange} propType={propType} setPropType={setPropType}/>}
           {renderContent()}
         </div>
       </div>
