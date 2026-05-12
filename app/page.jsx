@@ -488,17 +488,6 @@ function DistrictFilter({dist, setDist, yearRange, setYearRange, propType, setPr
           </select>
         </div>
       </div>
-      <div style={{display:"flex",alignItems:"center",gap:6,padding:"6px 12px 8px",borderTop:"0.5px solid var(--color-border-tertiary)"}}>
-        <span style={{fontSize:11,fontWeight:500,color:"var(--color-text-secondary)",textTransform:"uppercase",letterSpacing:"0.06em"}}>Type:</span>
-        {propOpts.map(o => {
-          var active = propType === o.id
-          return (
-            <button key={o.id} onClick={() => setPropType(o.id)} style={{padding:"3px 10px",borderRadius:20,fontSize:11,fontWeight:active?600:400,cursor:"pointer",background:active?G:"transparent",color:active?"#fff":"var(--color-text-secondary)",border:`0.5px solid ${active?G:"var(--color-border-secondary)"}`}}>
-              {o.label}
-            </button>
-          )
-        })}
-      </div>
     </div>
   )
 }
